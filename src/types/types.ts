@@ -3,6 +3,7 @@ interface Payload {
   id?: string;
   language?: string;
   status?: string;
+  comment?: string;
 }
 
 export interface Gayload {
@@ -26,4 +27,5 @@ export interface Task {
   id: string;
   text: string;
   state: string;
+  comment: string;
 }

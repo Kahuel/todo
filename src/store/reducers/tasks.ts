@@ -9,6 +9,7 @@ export const tasks = (state = [], action: Action) => {
         id: _.uniqueId(),
         text: text,
         state: "OPEN",
+        comment: "",
       };
       return [...state, newTask];
     }
@@ -20,6 +21,12 @@ export const tasks = (state = [], action: Action) => {
       const { id, text } = action.payload;
       return state.map((task: Task) =>
         task.id === id ? { ...task, text: text } : task
+      );
+    }
+    case "UPDATE_TASK_COMMENT": {
+      const { id, comment } = action.payload;
+      return state.map((task: Task) =>
+        task.id === id ? { ...task, comment: comment } : task
       );
     }
     case "REPLACE_TASK": {
