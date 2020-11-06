@@ -2,8 +2,7 @@ interface Payload {
   text?: string;
   id?: string;
   language?: string;
-  from?: number;
-  to?: number;
+  status?: string;
 }
 
 export interface Gayload {
@@ -20,6 +19,7 @@ export interface State {
   tasks: [];
   text: string;
   language: string;
+  filter: string;
 }
 
 export interface Task {

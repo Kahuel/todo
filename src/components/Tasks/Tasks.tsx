@@ -29,7 +29,7 @@ const TaskCreator = (props: any) => {
             value={taskText}
             disabled={dis}
             style={{
-              backgroundColor: state === "active" ? "" : "#98FB98",
+              backgroundColor: state === "DONE" ? "#98FB98" : "",
             }}
             onMouseOver={() => setDis(false)}
             onMouseLeave={() => {
@@ -47,9 +47,9 @@ const TaskCreator = (props: any) => {
             onChange={(e) => setTaskText(e.target.value)}
           />
           <button onClick={() => dispatch(tasksActions.switchTaskState(id))}>
-            {state === "active"
-              ? tasksText(currentLanguage).finishTask
-              : tasksText(currentLanguage).reopenTask}
+            {state === "OPEN"
+              ? tasksText(currentLanguage).activateTask
+              : tasksText(currentLanguage).completeTask}
           </button>
           <button onClick={() => dispatch(tasksActions.removeTask(id))}>
             x
@@ -63,6 +63,7 @@ const TaskCreator = (props: any) => {
 export const Tasks = (props: any) => {
   const dispatch = useDispatch();
   const tasks = useSelector((state: State) => state.tasks);
+  const currentFilter = useSelector((state: State) => state.filter);
   const currentLanguage = useSelector((state: State) => state.language);
   const onDragEnd = useCallback(
     (result: DragUpdate) => {
@@ -78,12 +79,16 @@ export const Tasks = (props: any) => {
   if (tasks.length === 0) {
     return null;
   }
+  const filteredTasks =
+    currentFilter === "ALL"
+      ? tasks
+      : tasks.filter((task: Task) => task.state === currentFilter);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable-1">
         {(provided, snapshot) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {tasks.map((task: Task, index) => (
+            {filteredTasks.map((task: Task, index) => (
               <TaskCreator
                 key={task.id}
                 task={task}

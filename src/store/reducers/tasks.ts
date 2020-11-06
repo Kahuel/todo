@@ -8,7 +8,7 @@ export const tasks = (state = [], action: Action) => {
       const newTask = {
         id: _.uniqueId(),
         text: text,
-        state: "active",
+        state: "OPEN",
       };
       return [...state, newTask];
     }
@@ -30,14 +30,13 @@ export const tasks = (state = [], action: Action) => {
 
       return stateToMutate;
     }
-
     case "SWITCH_TASK_STATE": {
       const { id } = action.payload;
       return state.map((task: Task) => {
         if (task.id === id) {
           return {
             ...task,
-            state: task.state === "active" ? "finished" : "active",
+            state: task.state === "OPEN" ? "IN_PROPGRESS" : "DONE",
           };
         }
         return task;

@@ -2,20 +2,20 @@ export const tasksText = (language: string) => {
   switch (language) {
     case "ru": {
       return {
-        finishTask: "Завершить",
-        reopenTask: "Переоткрыть",
+        activateTask: "Начать",
+        completeTask: "Выполнить",
       };
     }
     case "eng": {
       return {
-        finishTask: "Finish",
-        reopenTask: "Reopen",
+        activateTask: "Activate",
+        completeTask: "Complete",
       };
     }
     default: {
       return {
-        finishTask: "Завершить",
-        reopenTask: "Переоткрыть",
+        activateTask: "Начать",
+        completeTask: "Выполнить",
       };
     }
   }
