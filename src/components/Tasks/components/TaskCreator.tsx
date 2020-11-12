@@ -15,12 +15,12 @@ interface Props {
 export const TaskCreator: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
   const { task, currentLanguage, refIndex, disableDrag } = props;
-  const { id, text, state, comment } = task;
+  const { id, text, state, description } = task;
   const [dis, setDis] = useState(true);
   const [clicked, setClicked] = useState(false);
   const [taskText, setTaskText] = useState(text);
-  const [taskComment, setTaskComment] = useState(text);
-  const [isHidden, setIsHidden] = useState(comment.length === 0);
+  const [taskDescription, setTaskDescription] = useState(text);
+  const [isHidden, setIsHidden] = useState(description.length === 0);
 
   return (
     <Draggable draggableId={id} index={refIndex} isDragDisabled={disableDrag}>
@@ -53,12 +53,12 @@ export const TaskCreator: React.FC<Props> = (props) => {
           />
           <input
             hidden={isHidden}
-            onChange={(e) => setTaskComment(e.target.value)}
+            onChange={(e) => setTaskDescription(e.target.value)}
             onBlur={() =>
-              dispatch(tasksActions.updateTaskComment(id, taskComment))
+              dispatch(tasksActions.updateTaskDescription(id, taskDescription))
             }
           />
-          <button onClick={() => setIsHidden(!isHidden)}>comment</button>
+          <button onClick={() => setIsHidden(!isHidden)}>description</button>
           <button onClick={() => dispatch(tasksActions.switchTaskState(id))}>
             {state === "OPEN"
               ? tasksText(currentLanguage).activateTask

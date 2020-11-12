@@ -35,11 +35,11 @@ const moveTask = (from: number, to: number) => ({
   },
 });
 
-const updateTaskComment = (id: string, comment: string) => ({
-  type: "UPDATE_TASK_COMMENT",
+const updateTaskDescription = (id: string, description: string) => ({
+  type: "UPDATE_TASK_DESCRIPTION",
   payload: {
     id,
-    comment,
+    description,
   },
 });
 
@@ -49,5 +49,5 @@ export const tasks = {
   switchTaskState,
   updateTaskText,
   moveTask,
-  updateTaskComment,
+  updateTaskDescription,
 };

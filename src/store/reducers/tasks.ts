@@ -9,7 +9,7 @@ export const tasks = (state = [], action: Action) => {
         id: _.uniqueId(),
         text: text,
         state: "OPEN",
-        comment: "",
+        description: "",
       };
       return [...state, newTask];
     }
@@ -23,10 +23,10 @@ export const tasks = (state = [], action: Action) => {
         task.id === id ? { ...task, text: text } : task
       );
     }
-    case "UPDATE_TASK_COMMENT": {
-      const { id, comment } = action.payload;
+    case "UPDATE_TASK_DESCRIPTION": {
+      const { id, description } = action.payload;
       return state.map((task: Task) =>
-        task.id === id ? { ...task, comment: comment } : task
+        task.id === id ? { ...task, description: description } : task
       );
     }
     case "REPLACE_TASK": {
