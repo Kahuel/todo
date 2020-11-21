@@ -4,12 +4,12 @@ import { Action, Task, Gayload } from "types/types";
 export const tasks = (state = [], action: Action) => {
   switch (action.type) {
     case "ADD_TASK": {
-      const { text } = action.payload;
+      const { text, description } = action.payload;
       const newTask = {
         id: _.uniqueId(),
         text: text,
         state: "OPEN",
-        description: "",
+        description: description,
       };
       return [...state, newTask];
     }

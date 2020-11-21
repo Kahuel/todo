@@ -20,7 +20,7 @@ export const TaskCreator: React.FC<Props> = (props) => {
   const [clicked, setClicked] = useState(false);
   const [taskText, setTaskText] = useState(text);
   const [taskDescription, setTaskDescription] = useState(text);
-  const [isHidden, setIsHidden] = useState(description.length === 0);
+  const [isHidden, setIsHidden] = useState(true);
 
   return (
     <Draggable draggableId={id} index={refIndex} isDragDisabled={disableDrag}>
@@ -52,6 +52,7 @@ export const TaskCreator: React.FC<Props> = (props) => {
             onChange={(e) => setTaskText(e.target.value)}
           />
           <input
+            value={description}
             hidden={isHidden}
             onChange={(e) => setTaskDescription(e.target.value)}
             onBlur={() =>

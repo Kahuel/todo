@@ -1,7 +1,8 @@
-const addTask = (text: string) => ({
+const addTask = (text: string, description: string) => ({
   type: "ADD_TASK",
   payload: {
-    text: text,
+    text,
+    description,
   },
 });
 
