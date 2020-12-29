@@ -4,23 +4,24 @@ import {
   Tasks,
   LocalizationBar,
   StatusBar,
-  LoginForm,
+  SigninForm,
   SignupForm,
+  InitForm,
 } from "components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { tasksApi } from "./api/tasks";
-
-tasksApi.getTasks().then(console.log);
 
 const App: React.FC = () => {
   return (
     <Router>
       <Switch>
+        <Route exact path="/">
+          <InitForm />
+        </Route>
         <Route path="/signup">
           <SignupForm />
         </Route>
-        <Route path="/login">
-          <LoginForm />
+        <Route path="/signin">
+          <SigninForm />
         </Route>
         <Route path="/taskManager">
           <LocalizationBar />

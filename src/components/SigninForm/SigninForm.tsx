@@ -1,18 +1,23 @@
 import React, { useState } from "react";
-import { signup } from "api/auth";
-import { Link } from "react-router-dom";
+import { signin } from "api/auth";
+import { Redirect, Link } from "react-router-dom";
 
-export const SignupForm: React.FC = () => {
+export const SigninForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  if (redirect === true) {
+    return <Redirect to="/taskManager" />;
+  }
+
   return (
     <div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          signup(username, password);
-          setUsername("");
-          setPassword("");
+          signin(username, password);
+          setRedirect(true);
         }}
       >
         <input
@@ -27,7 +32,7 @@ export const SignupForm: React.FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Signup</button>
+        <button>Signin</button>
       </form>
       <Link to="/">
         <button>Back</button>

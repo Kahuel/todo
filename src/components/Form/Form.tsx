@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { setCookie } from "utils/cookie";
 import { tasks as tasksActions } from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "types/types";
 import { formText } from "components/Text";
+import { Link } from "react-router-dom";
 
 export const Form: React.FC = (props: any) => {
   const [newTaskDescription, setNewTaskDescription] = useState("");
@@ -18,6 +20,15 @@ export const Form: React.FC = (props: any) => {
         setnewTaskText("");
       }}
     >
+      <Link to="/">
+        <button
+          onClick={() => {
+            setCookie("token", "");
+          }}
+        >
+          Log out
+        </button>
+      </Link>
       <input
         type="text"
         required

@@ -21,6 +21,7 @@ export interface State {
   text: string;
   language: string;
   filter: string;
+  token: string;
 }
 
 export interface Task {
