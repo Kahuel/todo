@@ -1,8 +1,15 @@
-const addTask = (text: string, description: string) => ({
+const addTask = (title: string, description: string) => ({
   type: "ADD_TASK",
   payload: {
-    text,
+    title,
     description,
+  },
+});
+
+const addInitialTasks = (initTasks: any) => ({
+  type: "ADD_INITIAL_TASKS",
+  payload: {
+    initTasks,
   },
 });
 
@@ -20,11 +27,11 @@ const switchTaskState = (id: string) => ({
   },
 });
 
-const updateTaskText = (id: string, text: string) => ({
+const updateTaskText = (id: string, title: string) => ({
   type: "UPDATE_TASK",
   payload: {
     id: id,
-    text: text,
+    title: title,
   },
 });
 
@@ -46,6 +53,7 @@ const updateTaskDescription = (id: string, description: string) => ({
 
 export const tasks = {
   addTask,
+  addInitialTasks,
   removeTask,
   switchTaskState,
   updateTaskText,

@@ -8,10 +8,34 @@ const getTasks = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return initTasks;
+  return initTasks.data;
 };
 
-const addTask = async (title: string, description: string) =>
-  await instance.post("/tasks", { title, description });
+const addTask = async (title: string, description: string) => {
+  const token = getCookie("token");
+  return await instance.post(
+    "/tasks",
+    {
+      title,
+      description,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
 
-export const tasksApi = { getTasks, addTask };
+const deleteTask = async (id: string) => {
+  const token = getCookie("token");
+  await instance.delete(`/tasks/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+const updateTaskStatus = async (id: number, status: string) =>
+  await instance.patch(`/tasks/${id}/status`, { data: { status } });
+
+export const tasksApi = { getTasks, addTask, deleteTask, updateTaskStatus };

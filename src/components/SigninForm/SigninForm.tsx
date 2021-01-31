@@ -10,13 +10,12 @@ export const SigninForm: React.FC = () => {
   if (redirect === true) {
     return <Redirect to="/taskManager" />;
   }
-
   return (
     <div>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          signin(username, password);
+          await signin(username, password);
           setRedirect(true);
         }}
       >

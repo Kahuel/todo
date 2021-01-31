@@ -3,11 +3,15 @@ import { Action, Task, Gayload } from "types/types";
 
 export const tasks = (state = [], action: Action) => {
   switch (action.type) {
+    case "ADD_INITIAL_TASKS": {
+      const { initTasks } = action.payload;
+      return initTasks;
+    }
     case "ADD_TASK": {
-      const { text, description } = action.payload;
+      const { title, description } = action.payload;
       const newTask = {
         id: _.uniqueId(),
-        text: text,
+        title: title,
         state: "OPEN",
         description: description,
       };
@@ -18,9 +22,9 @@ export const tasks = (state = [], action: Action) => {
       return state.filter((task: Task) => task.id !== id);
     }
     case "UPDATE_TASK": {
-      const { id, text } = action.payload;
+      const { id, title } = action.payload;
       return state.map((task: Task) =>
-        task.id === id ? { ...task, text: text } : task
+        task.id === id ? { ...task, title: title } : task
       );
     }
     case "UPDATE_TASK_DESCRIPTION": {
