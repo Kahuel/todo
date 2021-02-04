@@ -1,10 +1,12 @@
 interface Payload {
+  task?: Task;
   title?: string;
-  id?: string;
+  id?: number;
   language?: string;
   status?: string;
   description?: string;
-  initTasks?: any;
+  initTasks?: Task[];
+  updatedTask?: Task;
 }
 
 export interface Gayload {
@@ -26,8 +28,8 @@ export interface State {
 }
 
 export interface Task {
-  id: string;
+  id: number;
   title: string;
-  state: string;
+  status: string;
   description: string;
 }

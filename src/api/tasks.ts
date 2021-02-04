@@ -27,7 +27,7 @@ const addTask = async (title: string, description: string) => {
   );
 };
 
-const deleteTask = async (id: string) => {
+const deleteTask = async (id: number) => {
   const token = getCookie("token");
   await instance.delete(`/tasks/${id}`, {
     headers: {
@@ -35,7 +35,18 @@ const deleteTask = async (id: string) => {
     },
   });
 };
-const updateTaskStatus = async (id: number, status: string) =>
-  await instance.patch(`/tasks/${id}/status`, { data: { status } });
+
+const updateTaskStatus = async (id: number, status: string) => {
+  const token = getCookie("token");
+  return await instance.patch(
+    `/tasks/${id}/status`,
+    { status },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
 
 export const tasksApi = { getTasks, addTask, deleteTask, updateTaskStatus };

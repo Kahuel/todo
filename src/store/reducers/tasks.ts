@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { Action, Task, Gayload } from "types/types";
 
 export const tasks = (state = [], action: Action) => {
@@ -8,14 +7,8 @@ export const tasks = (state = [], action: Action) => {
       return initTasks;
     }
     case "ADD_TASK": {
-      const { title, description } = action.payload;
-      const newTask = {
-        id: _.uniqueId(),
-        title: title,
-        state: "OPEN",
-        description: description,
-      };
-      return [...state, newTask];
+      const { task } = action.payload;
+      return [...state, task];
     }
     case "REMOVE_TASK": {
       const { id } = action.payload;
@@ -42,13 +35,10 @@ export const tasks = (state = [], action: Action) => {
       return stateToMutate;
     }
     case "SWITCH_TASK_STATE": {
-      const { id } = action.payload;
+      const { id, updatedTask } = action.payload;
       return state.map((task: Task) => {
         if (task.id === id) {
-          return {
-            ...task,
-            state: task.state === "OPEN" ? "IN_PROPGRESS" : "DONE",
-          };
+          return updatedTask;
         }
         return task;
       });

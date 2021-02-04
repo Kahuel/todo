@@ -16,7 +16,7 @@ interface Props {
 export const TaskCreator: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
   const { task, currentLanguage, refIndex, disableDrag } = props;
-  const { id, title, state, description } = task;
+  const { id, title, status, description } = task;
   const [textDis, setTextDis] = useState(true);
   const [clicked, setClicked] = useState(false);
   const [taskText, setTaskText] = useState(title);
@@ -39,7 +39,7 @@ export const TaskCreator: React.FC<Props> = (props) => {
             value={taskText}
             disabled={textDis}
             style={{
-              backgroundColor: state === "DONE" ? "#98FB98" : "",
+              backgroundColor: status === "DONE" ? "#98FB98" : "",
             }}
             onMouseOver={() => setTextDis(false)}
             onMouseLeave={() => {
@@ -65,11 +65,22 @@ export const TaskCreator: React.FC<Props> = (props) => {
             }
           />
           <button onClick={() => setIsHidden(!isHidden)}>description</button>
-          <button onClick={() => dispatch(tasksActions.switchTaskState(id))}>
-            {state === "OPEN"
-              ? tasksText(currentLanguage).activateTask
-              : tasksText(currentLanguage).completeTask}
-          </button>
+          <select
+            onChange={async (e) => {
+              const updateTaskResponse = await tasksApi.updateTaskStatus(
+                id,
+                e.target.value
+              );
+              dispatch(
+                tasksActions.switchTaskState(id, updateTaskResponse.data)
+              );
+            }}
+            defaultValue={status}
+          >
+            <option value="OPEN">On hold</option>
+            <option value="IN_PROGRESS">Active</option>
+            <option value="DONE">Finished</option>
+          </select>
           <button
             onClick={async () => {
               await tasksApi.deleteTask(id);

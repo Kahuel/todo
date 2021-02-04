@@ -18,7 +18,7 @@ export const StatusBar: React.FC = (props: any) => {
       >
         <option value="ALL">{currentLanguage.all}</option>
         <option value="OPEN">{currentLanguage.opened}</option>
-        <option value="IN_PROPGRESS">{currentLanguage.inProgress}</option>
+        <option value="IN_PROGRESS">{currentLanguage.inProgress}</option>
         <option value="DONE">{currentLanguage.done}</option>
       </select>
     </div>

@@ -15,11 +15,11 @@ export const Form: React.FC = (props: any) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const popa = async () => {
+    const getInitTask = async () => {
       const initTasks = await tasksApi.getTasks();
       dispatch(tasksActions.addInitialTasks(initTasks));
     };
-    popa();
+    getInitTask();
   }, []);
 
   if (token === "") {
@@ -39,12 +39,11 @@ export const Form: React.FC = (props: any) => {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          dispatch(tasksActions.addTask(newTaskText, newTaskDescription));
           const newTask = await tasksApi.addTask(
             newTaskText,
             newTaskDescription
           );
-          console.log(newTask.data);
+          dispatch(tasksActions.addTask(newTask.data));
           setNewTaskDescription("");
           setnewTaskText("");
         }}

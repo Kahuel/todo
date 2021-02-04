@@ -27,7 +27,7 @@ export const Tasks: React.FC = () => {
   const filteredTasks =
     currentFilter === "ALL"
       ? tasks
-      : tasks.filter((task: Task) => task.state === currentFilter);
+      : tasks.filter((task: Task) => task.status === currentFilter);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable-1">

@@ -1,8 +1,9 @@
-const addTask = (title: string, description: string) => ({
+import { Task } from "types/types";
+
+const addTask = (task: Task) => ({
   type: "ADD_TASK",
   payload: {
-    title,
-    description,
+    task,
   },
 });
 
@@ -13,21 +14,22 @@ const addInitialTasks = (initTasks: any) => ({
   },
 });
 
-const removeTask = (id: string) => ({
+const removeTask = (id: number) => ({
   type: "REMOVE_TASK",
   payload: {
     id: id,
   },
 });
 
-const switchTaskState = (id: string) => ({
+const switchTaskState = (id: number, updatedTask: Task) => ({
   type: "SWITCH_TASK_STATE",
   payload: {
-    id: id,
+    id,
+    updatedTask,
   },
 });
 
-const updateTaskText = (id: string, title: string) => ({
+const updateTaskText = (id: number, title: string) => ({
   type: "UPDATE_TASK",
   payload: {
     id: id,
@@ -43,7 +45,7 @@ const moveTask = (from: number, to: number) => ({
   },
 });
 
-const updateTaskDescription = (id: string, description: string) => ({
+const updateTaskDescription = (id: number, description: string) => ({
   type: "UPDATE_TASK_DESCRIPTION",
   payload: {
     id,
